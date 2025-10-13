@@ -10,6 +10,9 @@ const travelItemSchema = new mongoose.Schema({
   // Store coordinates
   latitude: { type: Number, default: null },
   longitude: { type: Number, default: null },
+
+  // Change to array to store multiple Cloudinary URLs
+  images: { type: [String], default: [] },
 });
 
 module.exports = mongoose.model("TravelItem", travelItemSchema);

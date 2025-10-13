@@ -23,17 +23,14 @@ const storage = new CloudinaryStorage({
 const upload = multer({ storage });
 
 // ---------------- CREATE POST ----------------
-router.post("/", auth, upload.single("images"), async (req, res) => {
+router.post("/", auth, upload.array("images", 5), async (req, res) => {
   try {
     const { title, content, location, tags } = req.body;
 
     if (!title || !content)
       return res.status(400).json({ msg: "Title and content are required" });
 
-    // Use Cloudinary URL if file uploaded, else keep old local path (if provided)
-    const images = req.file
-      ? [req.file.path] // cloudinary URL
-      : []; // old posts already have local paths stored
+    const images = req.files ? req.files.map(file => file.path) : [];
 
     const newPost = new Post({
       user: req.user.id,
@@ -41,7 +38,7 @@ router.post("/", auth, upload.single("images"), async (req, res) => {
       content,
       images,
       location: location || "",
-      tags: tags ? tags.split(",").map((t) => t.trim()) : [],
+      tags: tags ? tags.split(",").map(t => t.trim()) : [],
       likes: [],
       comments: [],
       savedBy: [],
@@ -87,10 +84,46 @@ router.get("/mine", auth, async (req, res) => {
   }
 });
 
-// ---------------- EDIT POST ----------------
-router.put("/:id", auth, upload.single("images"), async (req, res) => {
+// ---------------- GET SAVED POSTS ----------------
+router.get("/saved", auth, async (req, res) => {
   try {
-    let post = await Post.findById(req.params.id);
+    const userId = req.user.id;
+    const savedPosts = await Post.find({ savedBy: userId })
+      .populate("user", "name profilePic")
+      .populate("comments.user", "name profilePic")
+      .sort({ createdAt: -1 });
+
+    res.json({ posts: savedPosts });
+  } catch (err) {
+    console.error("Error fetching saved posts:", err);
+    res.status(500).json({ msg: "Server error", error: err.message });
+  }
+});
+
+// ---------------- GET SINGLE POST BY ID ----------------
+router.get("/:id", auth, async (req, res) => {
+  try {
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(req.params.id))
+      return res.status(400).json({ msg: "Invalid post ID" });
+
+    const post = await Post.findById(req.params.id)
+      .populate("user", "name profilePic")
+      .populate("comments.user", "name profilePic");
+
+    if (!post) return res.status(404).json({ msg: "Post not found" });
+
+    res.json({ post });
+  } catch (err) {
+    console.error("Error fetching single post:", err);
+    res.status(500).json({ msg: "Server error", error: err.message });
+  }
+});
+
+// ---------------- EDIT POST ----------------
+router.put("/:id", auth, upload.array("images", 5), async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ msg: "Post not found" });
     if (post.user.toString() !== req.user.id)
       return res.status(401).json({ msg: "Not authorized" });
@@ -100,16 +133,16 @@ router.put("/:id", auth, upload.single("images"), async (req, res) => {
     post.title = title || post.title;
     post.content = content || post.content;
     post.location = location || post.location;
-    post.tags = tags ? tags.split(",").map((t) => t.trim()) : post.tags;
+    post.tags = tags ? tags.split(",").map(t => t.trim()) : post.tags;
     post.date = Date.now();
 
-    if (req.file) {
-      // Keep old images intact if they exist; add new Cloudinary URL
-      post.images.push(req.file.path);
+    if (req.files && req.files.length > 0) {
+      post.images.push(...req.files.map(f => f.path));
     }
 
     const updatedPost = await post.save();
     await updatedPost.populate("user", "name profilePic");
+
     res.json({ post: updatedPost });
   } catch (err) {
     console.error("Error editing post:", err);
@@ -125,7 +158,6 @@ router.delete("/:id", auth, async (req, res) => {
     if (post.user.toString() !== req.user.id)
       return res.status(401).json({ msg: "Not authorized" });
 
-    // No need to delete old uploads; keep them for deployment
     await post.deleteOne();
     res.json({ msg: "Post deleted successfully" });
   } catch (err) {
@@ -161,7 +193,7 @@ router.post("/:id/like", auth, async (req, res) => {
   }
 });
 
-// ---------------- COMMENT ON POST (WITH NOTIFICATIONS) ----------------
+// ---------------- COMMENT ON POST ----------------
 router.post("/:id/comment", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -215,7 +247,6 @@ router.post("/:id/comment", auth, async (req, res) => {
 });
 
 // ---------------- SAVE / UNSAVE POST ----------------
-// ---------------- SAVE / UNSAVE POST ----------------
 router.post("/:id/save", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -230,12 +261,10 @@ router.post("/:id/save", auth, async (req, res) => {
 
     let action;
     if (post.savedBy.some((id) => id.toString() === userId)) {
-      // Unsave
       post.savedBy = post.savedBy.filter((id) => id.toString() !== userId);
       user.savedPosts = user.savedPosts.filter((id) => id.toString() !== post._id.toString());
       action = "unsaved";
     } else {
-      // Save
       post.savedBy.push(userId);
       user.savedPosts.push(post._id);
       action = "saved";
@@ -247,22 +276,6 @@ router.post("/:id/save", auth, async (req, res) => {
     res.json({ action, savedBy: post.savedBy.map((id) => id.toString()) });
   } catch (err) {
     console.error("Error saving post:", err);
-    res.status(500).json({ msg: "Server error", error: err.message });
-  }
-});
-
-// ---------------- GET SAVED POSTS ----------------
-router.get("/saved", auth, async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const savedPosts = await Post.find({ savedBy: userId })
-      .populate("user", "name profilePic")
-      .populate("comments.user", "name profilePic")
-      .sort({ createdAt: -1 });
-
-    res.json({ posts: savedPosts });
-  } catch (err) {
-    console.error("Error fetching saved posts:", err);
     res.status(500).json({ msg: "Server error", error: err.message });
   }
 });

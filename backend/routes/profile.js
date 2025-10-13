@@ -2,10 +2,12 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
 const multer = require("multer");
-const User = require("../models/User");
-const Post = require("../models/Post"); // to fetch user posts
+const mongoose = require("mongoose");
 
-// Multer setup
+const User = require("../models/User");
+const Post = require("../models/Post"); // <-- FIX: import Post model
+
+// Cloudinary setup
 const cloudinary = require("../config/cloudinary");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
@@ -19,7 +21,6 @@ const storage = new CloudinaryStorage({
 });
 
 const upload = multer({ storage });
-
 
 // ------------------ Create / Update Profile ------------------
 router.post("/", auth, upload.single("profilePic"), async (req, res) => {
@@ -57,20 +58,27 @@ router.get("/me", auth, async (req, res) => {
 // ------------------ Get public profile by ID ------------------
 router.get("/:id", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id)
+    const { id } = req.params;
+
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ msg: "Invalid user ID" });
+    }
+
+    const user = await User.findById(id)
       .select("-password")
       .populate("followers", "name profilePic")
       .populate("following", "name profilePic");
+
     if (!user) return res.status(404).json({ msg: "User not found" });
 
-    // Get user's posts
     const posts = await Post.find({ user: user._id })
-      .sort({ createdAt: -1 }) // newest first
-      .select("title createdAt location");
+      .sort({ createdAt: -1 })
+      .select("title content images createdAt location tags");
 
     res.json({ user, posts });
   } catch (err) {
-    console.error(err);
+    console.error("Error fetching profile:", err);
     res.status(500).json({ msg: "Server error" });
   }
 });
@@ -88,11 +96,9 @@ router.post("/:id/follow", auth, async (req, res) => {
     const isFollowing = currentUser.following.includes(targetUser._id);
 
     if (isFollowing) {
-      // Unfollow
       currentUser.following.pull(targetUser._id);
       targetUser.followers.pull(currentUser._id);
     } else {
-      // Follow
       currentUser.following.push(targetUser._id);
       targetUser.followers.push(currentUser._id);
     }
@@ -111,26 +117,21 @@ router.post("/:id/follow", auth, async (req, res) => {
   }
 });
 
-
 // ------------------ User Analytics ------------------
 router.get("/analytics/data", auth, async (req, res) => {
   try {
     const userId = req.user.id;
 
-    // Fetch user info
     const user = await User.findById(userId)
       .populate("followers", "name")
       .populate("following", "name");
 
     if (!user) return res.status(404).json({ msg: "User not found" });
 
-    // Fetch posts of the current user
     const posts = await Post.find({ user: userId });
 
-    // Calculate total likes
     const totalLikes = posts.reduce((sum, post) => sum + (post.likes?.length || 0), 0);
 
-    // Prepare analytics data
     const analytics = {
       totalPosts: posts.length,
       totalLikes,
@@ -149,6 +150,5 @@ router.get("/analytics/data", auth, async (req, res) => {
     res.status(500).json({ msg: "Server error while fetching analytics" });
   }
 });
-
 
 module.exports = router;
