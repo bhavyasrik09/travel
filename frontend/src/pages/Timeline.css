@@ -1,0 +1,312 @@
+/* Full screen background */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  background-color: #0d1117; /* Full black/dark theme */
+  color: #f1f1f1;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+}
+
+/* Timeline container spans full width */
+.timeline-container {
+  padding: 40px 20px;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Title */
+.timeline-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #ff7f50;
+  margin-bottom: 50px;
+  text-shadow: 0 0 10px #ff7f50;
+}
+
+/* Wrapper for timeline items */
+.timeline-items-wrapper {
+  position: relative;
+  max-width: 1200px; /* full screen width but centered */
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Vertical line in the center */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #4e73df, #ff7f50);
+  border-radius: 2px;
+  z-index: 1;
+}
+
+/* Timeline items container */
+.timeline-items {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Individual timeline item */
+.timeline-item {
+  position: relative;
+  width: 45%; /* increase width */
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(255, 127, 80, 0.4), 0 0 35px rgba(88, 166, 255, 0.3);
+}
+
+/* Left side item */
+.timeline-item.left {
+  left: -5%; /* shift more to the left */
+  text-align: right;
+}
+
+/* Right side item */
+.timeline-item.right {
+  left: 55%; /* shift more to the right */
+  text-align: left;
+}
+
+/* Connector from line to item */
+.timeline-connector {
+  position: absolute;
+  width: 25px;
+  height: 4px;
+  background: #ff7f50;
+  top: 30px;
+  z-index: 2;
+}
+
+.timeline-item.left .timeline-connector {
+  right: -25px;
+}
+
+.timeline-item.right .timeline-connector {
+  left: -25px;
+}
+
+/* Dot on the line */
+.timeline-dot {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #4e73df;
+  border-radius: 50%;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px #4e73df, 0 0 20px #ff7f50;
+  z-index: 3;
+}
+
+/* Post content */
+.timeline-content {
+  background: linear-gradient(145deg, #161b22, #1f242d);
+  border: 1px solid #30363d;
+  border-radius: 15px;
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  box-shadow: 0 0 10px rgba(255, 127, 80, 0.2);
+  transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(255, 127, 80, 0.4), 0 0 40px rgba(88, 166, 255, 0.3);
+}
+
+/* Image inside post */
+.timeline-content img {
+  width: 140px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 127, 80, 0.3);
+}
+
+/* Text content */
+.timeline-text h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.3rem;
+  color: #ff7f50;
+}
+
+.timeline-text p {
+  margin: 2px 0;
+  font-size: 0.95rem;
+  color: #aaa;
+}
+
+.timeline-date {
+  font-weight: bold;
+  color: #58a6ff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .timeline-item {
+    width: 48%;
+  }
+
+  .timeline-item.left {
+    left: 0%;
+  }
+
+  .timeline-item.right {
+    left: 52%;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-item,
+  .timeline-item.left,
+  .timeline-item.right {
+    width: 100%;
+    padding: 15px 20px;
+    text-align: left;
+    left: 0 !important;
+  }
+
+  .timeline-connector {
+    display: none;
+  }
+
+  .timeline-line {
+    left: 20px;
+    transform: none;
+  }
+
+  .timeline-dot {
+    left: 20px;
+  }
+
+  .timeline-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .timeline-content img {
+    width: 100%;
+    height: 150px;
+  }
+}
+/* Left side item */
+.timeline-item.left {
+  left: -10%; /* was -5%, now more left */
+  text-align: right;
+}
+
+/* Right side item stays the same */
+.timeline-item.right {
+  left: 55%; /* same as before */
+  text-align: left;
+}
+
+/* Remove the post dot */
+.timeline-dot {
+  display: none;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #0d0d0d; /* dark black */
+  font-family: 'Poppins', sans-serif;
+  color: #f1f1f1;
+}
+/* Make the whole page full black */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #0d0d0d; /* full black background */
+  font-family: 'Poppins', sans-serif;
+  color: #f1f1f1;
+}
+
+/* Timeline container takes full height */
+.timeline-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  background: transparent; /* container transparent, background from root */
+}
+/* Make entire page background black */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #000; /* Full black */
+  color: #fff; /* Optional: make text readable */
+  min-height: 100%;
+}
+/* Full page background */
+body, html {
+  background-color: #0d1117; /* dark GitHub-like background */
+  color: #f1f1f1; /* default text color */
+  min-height: 100%;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Timeline container */
+.timeline-container {
+  padding: 30px;
+  min-height: 100vh; /* full screen height */
+}
+
+/* Timeline items background */
+.timeline-content {
+  background: #161b22; /* dark card background */
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(88, 166, 255, 0.4);
+}
+
+/* Title */
+.timeline-title {
+  text-align: center;
+  color: #58a6ff;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+/* Timeline line & dots */
+.timeline-line {
+  background-color: #30363d;
+}
+
+.timeline-dot {
+  background-color: #ff7f50;
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #0f0f13; /* main dark background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #e0e0e0;
+}

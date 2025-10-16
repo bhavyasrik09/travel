@@ -1,0 +1,211 @@
+/* Profile container */
+.profile-view-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #121212;
+  color: #f5f5f5;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Profile header */
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Profile image */
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #0073e6;
+}
+
+/* User name */
+.profile-header h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Bio */
+.bio {
+  font-size: 1rem;
+  color: #ccc;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Follow / Unfollow button */
+.follow-btn {
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-top: 10px;
+}
+
+.follow-btn.follow {
+  background-color: #0073e6;
+  color: #fff;
+}
+
+.follow-btn.unfollow {
+  background-color: #e60023;
+  color: #fff;
+}
+
+.follow-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Stats (posts, followers, following) */
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+/* User posts */
+.profile-posts {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* PostCard overrides for dark mode */
+.post-card {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post-card img.post-img {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.post-content h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.post-content p {
+  font-size: 0.95rem;
+  color: #ddd;
+  margin-bottom: 8px;
+}
+
+.post-location {
+  background-color: #0077b5;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-view-container {
+    padding: 15px;
+  }
+
+  .profile-img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+.post-images-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.post-images {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 10px;
+}
+
+.post-images::-webkit-scrollbar {
+  display: none;
+}
+
+.post-detail-img {
+  width: 280px;
+  height: 180px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 22px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 5;
+}
+
+.carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-arrow.left {
+  left: 10px;
+}
+
+.carousel-arrow.right {
+  right: 10px;
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,789 @@
+/* Feed & Profile posts shared styles */
+
+/* Container */
+.feed-container,
+.profile-view-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f5f5f5;
+}
+
+/* Search input (feed only) */
+.search-input {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background: #1e1e1e;
+  color: #f5f5f5;
+  font-size: 0.95rem;
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.search-input:focus {
+  outline: none;
+  border: 1px solid #0077b5;
+  box-shadow: 0 0 5px rgba(0, 119, 181, 0.5);
+}
+
+/* Post card */
+.post-item,
+.profile-posts .post-card {
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #f5f5f5;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.post-item:hover,
+.profile-posts .post-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+  transform: translateY(-2px);
+}
+
+/* Highlight followed users' posts */
+.post-item.followed,
+.profile-posts .post-card.followed {
+  border-left: 5px solid #0077b5;
+  padding-left: 15px;
+}
+
+/* Author & Date */
+.post-author,
+.profile-posts .post-author {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.author-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.author-name:hover {
+  color: #0077b5;
+  text-decoration: underline;
+}
+
+.post-date {
+  font-size: 0.8rem;
+  color: #bbb;
+}
+
+/* Main layout: Image left, content right */
+.post-main,
+.profile-posts .post-main {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Image section */
+.post-img-container,
+.profile-posts .post-img-container {
+  flex: 1;
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-img,
+.profile-posts .post-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.post-img:hover,
+.profile-posts .post-img:hover {
+  transform: scale(1.03);
+}
+
+/* Content section */
+.post-content,
+.profile-posts .post-content {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-content h3,
+.profile-posts .post-content h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.post-content p,
+.profile-posts .post-content p {
+  font-size: 0.95rem;
+  color: #ddd;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* Tags and location at bottom */
+.post-tags-location,
+.profile-posts .post-tags-location {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #ccc;
+  font-size: 0.85rem;
+}
+
+/* Individual tag styling */
+.tag {
+  background: #333;
+  color: #eee;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+}
+
+/* Location badge */
+.post-location {
+  background: #0077b5;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+/* Following label */
+.following-label {
+  background: #0077b5;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: auto;
+  align-self: flex-start;
+}
+
+/* Profile header */
+.profile-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #0073e6;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.bio {
+  font-size: 1rem;
+  color: #ccc;
+  margin-top: 5px;
+}
+
+.follow-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: #0073e6;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.follow-btn.unfollow {
+  background-color: #e60023;
+}
+
+.follow-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.profile-stats {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  .post-main,
+  .profile-posts .post-main {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .post-img-container,
+  .profile-posts .post-img-container {
+    max-width: 100%;
+  }
+
+  .post-img,
+  .profile-posts .post-img {
+    height: 200px;
+  }
+
+  .post-content {
+    width: 100%;
+  }
+
+  .post-author {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+/* Feed card container */
+.post-item {
+  background: #2a2a2a; /* dark background */
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #f5f5f5; /* light text */
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.feed-container {
+  background: #121212; /* dark background for the whole feed */
+  color: #f5f5f5;
+}
+
+.profile-view-container {
+  background: #ffffff; /* dark background for profile */
+  color: #f5f5f5;
+}
+
+
+
+.add-comment button {
+  background-color: #0077b5;   /* LinkedIn blue style */
+  color: white;               /* White text */
+  border: none;               /* No border */
+  border-radius: 6px;         /* Rounded corners */
+  padding: 6px 14px;          /* Padding for button size */
+  margin-left: 8px;           /* Space from input */
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.add-comment button:hover {
+  background-color: #005582;  /* Darker shade on hover */
+  transform: scale(1.05);     /* Slight zoom effect */
+}
+
+.add-comment button:active {
+  background-color: #004466;  /* Even darker when pressed */
+  transform: scale(0.95);     /* Pressed effect */
+}
+
+
+
+/* --- Comments Section Styling --- */
+.comments-section {
+  margin-top: 15px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 10px 12px;
+  transition: max-height 0.3s ease;
+}
+
+.comment {
+  padding: 6px 0;
+  border-bottom: 1px solid #333;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.comment:last-child {
+  border-bottom: none;
+}
+
+/* Collapse extra comments by default */
+.comments-section.collapsed .comment:nth-of-type(n + 3) {
+  display: none;
+}
+
+/* Toggle button */
+.show-more-btn {
+  display: inline-block;
+  margin-top: 6px;
+  color: #0077b5;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.9rem;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: color 0.2s ease-in-out;
+}
+
+.show-more-btn:hover {
+  color: #00a2ff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === Feed & Profile Posts Shared Styles === */
+
+/* Container */
+.feed-container,
+.profile-view-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f5f5f5;
+  background: linear-gradient(145deg, #1b1b2f, #1e1e2f);
+}
+
+/* Search input (feed only) */
+.search-input {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #1b1b2f;
+  color: #f5f5f5;
+  font-size: 0.95rem;
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.search-input:focus {
+  outline: none;
+  border: 1px solid #9b59b6; /* purple glow */
+  box-shadow: 0 0 8px rgba(155, 89, 182, 0.7);
+}
+
+/* Post card */
+.post-item,
+.profile-posts .post-card {
+  background: #1b1b2f; /* deep purple background */
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(155, 89, 182, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #f5f5f5;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.post-item:hover,
+.profile-posts .post-card:hover {
+  box-shadow: 0 6px 25px rgba(155, 89, 182, 0.8);
+  transform: translateY(-3px);
+}
+
+/* Highlight followed users' posts */
+.post-item.followed,
+.profile-posts .post-card.followed {
+  border-left: 5px solid #9b59b6; /* purple glow */
+  padding-left: 15px;
+}
+
+/* Author & Date */
+.post-author,
+.profile-posts .post-author {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.author-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.author-name:hover {
+  color: #9b59b6; /* purple highlight */
+  text-decoration: underline;
+}
+
+.post-date {
+  font-size: 0.8rem;
+  color: #ccc;
+}
+
+/* Main layout: Image left, content right */
+.post-main,
+.profile-posts .post-main {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Image section */
+.post-img-container,
+.profile-posts .post-img-container {
+  flex: 1;
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-img,
+.profile-posts .post-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.post-img:hover,
+.profile-posts .post-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(155, 89, 182, 0.6);
+}
+
+/* Content section */
+.post-content,
+.profile-posts .post-content {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-content h3,
+.profile-posts .post-content h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.post-content p,
+.profile-posts .post-content p {
+  font-size: 0.95rem;
+  color: #ddd;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* Tags and location */
+.post-tags-location,
+.profile-posts .post-tags-location {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #ccc;
+  font-size: 0.85rem;
+}
+
+/* Individual tag styling */
+.tag {
+  background: #2a1b3b;
+  color: #eee;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+}
+
+/* Location badge */
+.post-location {
+  background: #9b59b6;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+/* Following label */
+.following-label {
+  background: #9b59b6;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: auto;
+  align-self: flex-start;
+}
+
+/* Profile header */
+.profile-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #9b59b6;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+
+
+
+.feed-container {
+  background: #1a1a28;
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  box-shadow: 
+    0 0 15px rgba(132, 46, 255, 0.3),
+    0 0 25px rgba(164, 46, 255, 0.2),
+    0 0 40px rgba(155, 89, 182, 0.1);
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.feed-container:hover {
+  box-shadow: 
+    0 0 20px rgba(155, 89, 182, 0.6),
+    0 0 35px rgba(164, 46, 255, 0.4),
+    0 0 50px rgba(132, 46, 255, 0.2);
+}
+
+.feed-container h2 {
+  color: #9b59b6;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-left: 5px solid #9b59b6;
+  padding-left: 12px;
+  text-shadow: 0 0 5px rgba(155, 89, 182, 0.7);
+}
+
+
+.feed-container h2 {
+  color: #9b59b6; /* purple accent */
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-left: 5px solid #9b59b6;
+  padding-left: 12px;
+  text-shadow: 0 0 8px rgba(155, 89, 182, 0.8);
+  transition: all 0.3s ease;
+}
+
+.feed-container h2:hover {
+  text-shadow: 0 0 15px rgba(155, 89, 182, 1);
+}
+
+
+
+.profile-header h2 {
+  color: #9b59b6; /* purple accent */
+  font-size: 2rem;
+  margin-bottom: 15px;
+  border-left: 4px solid #9b59b6;
+  padding-left: 10px;
+  text-shadow: 0 0 5px rgba(155, 89, 182, 0.7);
+}
+.bio {
+  font-size: 1rem;
+  color: #ccc;
+  margin-top: 5px;
+}
+
+/* Follow button */
+.follow-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: #9b59b6;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.follow-btn.unfollow {
+  background-color: #e60023;
+}
+
+.follow-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Profile stats */
+.profile-stats {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Comments Section */
+.comments-section {
+  margin-top: 15px;
+  background: #1a1a2f;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.comment {
+  padding: 6px 0;
+  border-bottom: 1px solid #333;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.comment:last-child {
+  border-bottom: none;
+}
+
+/* Buttons */
+.add-comment button,
+.show-more-btn {
+  background-color: #9b59b6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.add-comment button:hover,
+.show-more-btn:hover {
+  background-color: #7d3c98;
+  transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .post-main,
+  .profile-posts .post-main {
+    flex-direction: column;
+  }
+  .post-img {
+    height: 200px;
+  }
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dashboard-layout .main-content .feed-container h2 {
+  color: #9b59b6 !important;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-left: 5px solid #9b59b6;
+  padding-left: 12px;
+  text-shadow: 0 0 8px rgba(155, 89, 182, 0.8);
+}
+.feed-container a {
+  color: #f1c40f; /* light yellow */
+  text-decoration: underline;
+}
+
+.feed-container a:hover {
+  color: #ffd700;
+}

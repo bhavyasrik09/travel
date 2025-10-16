@@ -1,0 +1,870 @@
+/* Full-page layout */
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: #0f0f13; /* slightly darker main background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #e0e0e0;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #1a1a28; /* darker sidebar */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 20px;
+  box-sizing: border-box;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.6);
+  transition: width 0.3s ease, background 0.3s;
+}
+
+.sidebar:hover {
+  width: 280px; /* subtle expand on hover */
+  background: #1f1f33;
+}
+
+.sidebar-profile {
+  text-align: center;
+  margin-bottom: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sidebar-profile:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+}
+
+.sidebar-profile-pic {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border: 2px solid #ff8c00; /* accent border */
+}
+
+.sidebar-profile h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #ff8c00; /* accent color */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Navigation buttons */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.sidebar-nav button {
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  padding: 12px 15px;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-nav button:hover {
+  background: #33334d;
+  color: #ff8c00;
+  transform: translateX(5px);
+}
+
+/* Logout button */
+.logout-btn {
+  margin-top: auto;
+  background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
+  color: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(90deg, #ff1a1a, #ff0000);
+  transform: translateY(-2px);
+}
+
+/* Main content */
+.main-content {
+  flex-grow: 1;
+  padding: 30px;
+  overflow-y: auto;
+  background: #14141c; /* slightly lighter than sidebar */
+  color: #e0e0e0;
+  border-left: 1px solid #2a2a3c;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Headings */
+.main-content h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ff8c00;
+  border-left: 4px solid #ff8c00;
+  padding-left: 10px;
+}
+
+/* Feed / Posts area (cardless modern look) */
+.post-card {
+  background: #1f1f2e; /* subtle contrast */
+  padding: 18px 22px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  transition: transform 0.25s, background 0.25s;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  background: #29293f;
+}
+
+/* Buttons */
+button {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+/* Input fields */
+input, textarea {
+  background: #1a1a28;
+  border: 1px solid #33334d;
+  color: #e0e0e0;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+input:focus, textarea:focus {
+  border-color: #ff8c00;
+  outline: none;
+  box-shadow: 0 0 8px rgba(255,140,0,0.5);
+}
+
+/* =========================
+   Mobile Responsiveness
+========================= */
+@media (max-width: 768px) {
+  .dashboard-layout {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Hide sidebar by default */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px; /* hidden offscreen */
+    width: 260px;
+    height: 100%;
+    z-index: 1000;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.show {
+    left: 0; /* slide in */
+  }
+
+  /* Hamburger button */
+  .hamburger-btn {
+    display: flex;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1100;
+    width: 40px;
+    height: 40px;
+    background: #1a1a28;
+    border: none;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .hamburger-btn div {
+    width: 25px;
+    height: 3px;
+    background: #ff8c00;
+    margin: 4px 0;
+    transition: 0.3s;
+  }
+
+  /* Adjust main content */
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-top: 60px; /* space for hamburger */
+    border-left: none;
+  }
+}
+
+/* Optional: Dark overlay when sidebar is open on mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 900;
+}
+
+.sidebar-overlay.show {
+  display: block;
+}
+
+
+
+
+
+
+
+/* ================= CreatePost UI ================= */
+
+/* Container for create post */
+.create-post-container {
+  background: #1a1a28; /* subtle dark contrast */
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(252, 255, 66, 0.6);
+  max-width: 700px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Heading */
+.create-post-container h2 {
+  color: #ff8c00;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  border-left: 4px solid #ff8c00;
+  padding-left: 10px;
+}
+
+/* Form inputs */
+.create-post-container input[type="text"],
+.create-post-container textarea,
+.create-post-container input[type="file"] {
+  background: #14141c;
+  border: 1px solid #33334d;
+  color: #e0e0e0;
+  padding: 12px 15px;
+  border-radius: 12px;
+  width: 100%;
+  font-size: 1rem;
+  transition: border 0.25s, box-shadow 0.25s;
+}
+
+.create-post-container input:focus,
+.create-post-container textarea:focus {
+  border-color: #ff8c00;
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
+}
+
+/* Textarea styling */
+.create-post-container textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* File input */
+.create-post-container input[type="file"] {
+  padding: 6px;
+  border-radius: 8px;
+}
+
+/* Submit button */
+.create-post-container button[type="submit"] {
+  background: linear-gradient(90deg, #ff8c00, #ff4d00);
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.create-post-container button[type="submit"]:hover {
+  background: linear-gradient(90deg, #ff4d00, #ff8c00);
+  transform: translateY(-2px);
+}
+
+/* Message text */
+.create-post-container .message {
+  color: #ff8c00;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .create-post-container {
+    padding: 20px;
+    margin: 15px;
+  }
+
+  .create-post-container h2 {
+    font-size: 1.6rem;
+  }
+}
+
+
+
+
+/* ================= EditProfile UI - Golden Glow Card ================= */
+
+/* Container for edit profile */
+.edit-profile-container {
+  background: #1a1a28; /* dark card background */
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  box-shadow: 0 0 15px rgba(132, 0, 255, 0.3),
+              0 0 25px rgba(164, 46, 255, 0.2),
+              0 0 40px rgba(255, 140, 0, 0.1); /* golden glow */
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit-profile-container:hover {
+  box-shadow: 0 0 20px rgba(255, 200, 0, 0.6),
+              0 0 35px rgba(255, 180, 0, 0.4),
+              0 0 50px rgba(255, 150, 0, 0.2);
+}
+
+/* Heading */
+.edit-profile-container h2 {
+  color: #ffb700;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-left: 5px solid #ffb700;
+  padding-left: 12px;
+  text-shadow: 0 0 5px rgba(255, 183, 0, 0.7);
+}
+
+/* Form inputs */
+.edit-profile-container input[type="text"],
+.edit-profile-container textarea,
+.edit-profile-container input[type="file"] {
+  background: #14141c;
+  border: 1px solid #33334d;
+  color: #e0e0e0;
+  padding: 14px 18px;
+  border-radius: 14px;
+  width: 100%;
+  font-size: 1rem;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.edit-profile-container input:focus,
+.edit-profile-container textarea:focus {
+  border-color: #ffb700;
+  outline: none;
+  box-shadow: 0 0 12px rgba(255, 183, 0, 0.7);
+}
+
+/* Textarea styling */
+.edit-profile-container textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* File input */
+.edit-profile-container input[type="file"] {
+  padding: 8px;
+  border-radius: 10px;
+}
+
+/* Save Changes button */
+.edit-profile-container button[type="submit"] {
+  background: linear-gradient(90deg, #ffb700, #ff8c00);
+  color: #fff;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 183, 0, 0.5);
+}
+
+.edit-profile-container button[type="submit"]:hover {
+  background: linear-gradient(90deg, #ff8c00, #ffb700);
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(255, 183, 0, 0.8);
+}
+
+/* Delete Account button */
+.edit-profile-container .delete-btn {
+  background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
+  color: #fff;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+}
+
+.edit-profile-container .delete-btn:hover {
+  background: linear-gradient(90deg, #ff1a1a, #ff0000);
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(255, 77, 77, 0.8);
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .edit-profile-container {
+    padding: 20px;
+    margin: 15px;
+  }
+
+  .edit-profile-container h2 {
+    font-size: 1.6rem;
+  }
+}
+
+
+/* My Posts / Feed profile pic */
+.post-author .author-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================= Unified Styling for My Posts & Saved Posts ================= */
+
+/* Container for My Posts & Saved Posts pages */
+.my-posts-container,
+.saved-posts-container {
+  background: #14141c; /* match main content */
+  color: #e0e0e0;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Headings (same as Feed and Create Post) */
+.my-posts-container h2,
+.saved-posts-container h2 {
+  color: #ff8c00;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  border-left: 4px solid #ff8c00;
+  padding-left: 10px;
+}
+
+/* Post Card (shared structure with Feed) */
+.my-posts-container .post-item,
+.saved-posts-container .post-item {
+  background: #1f1f2e;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.25s, background 0.25s;
+}
+
+.my-posts-container .post-item:hover,
+.saved-posts-container .post-item:hover {
+  transform: translateY(-4px);
+  background: #29293f;
+}
+
+/* Post Title & Content */
+.my-posts-container .post-item h3,
+.saved-posts-container .post-item h3 {
+  color: #ffb84d;
+  margin-bottom: 8px;
+  font-size: 1.3rem;
+}
+
+.my-posts-container .post-item p,
+.saved-posts-container .post-item p {
+  color: #ddd;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Post Actions (Like, Save, Delete) */
+.my-posts-container .post-actions button,
+.saved-posts-container .post-actions button {
+  background: transparent;
+  border: 1px solid #ff8c00;
+  color: #ff8c00;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.my-posts-container .post-actions button:hover,
+.saved-posts-container .post-actions button:hover {
+  background: #ff8c00;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Images */
+.my-posts-container .post-img-container img,
+.saved-posts-container .post-img-container img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+/* Empty Message (no posts) */
+.my-posts-container .no-posts,
+.saved-posts-container .no-posts {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #aaa;
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .my-posts-container,
+  .saved-posts-container {
+    padding: 20px;
+    gap: 18px;
+  }
+
+  .my-posts-container h2,
+  .saved-posts-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .my-posts-container .post-item,
+  .saved-posts-container .post-item {
+    padding: 15px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================= SIDEBAR STYLING ================= */
+
+/* Sidebar container */
+.sidebar {
+  width: 260px;
+  background: #1a1a28; /* dark sidebar background */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 20px;
+  box-sizing: border-box;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.6);
+  transition: width 0.3s ease, background 0.3s;
+}
+
+.sidebar:hover {
+  width: 280px; /* subtle expand on hover */
+  background: #1f1f33;
+}
+
+/* Sidebar profile section */
+.sidebar-profile {
+  text-align: center;
+  margin-bottom: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sidebar-profile:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+}
+
+.sidebar-profile-pic {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border: 2px solid #ff8c00; /* accent border */
+}
+
+.sidebar-profile h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #ff8c00; /* accent color */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Navigation buttons */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.sidebar-nav button {
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  padding: 12px 15px;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-nav button:hover {
+  background: #33334d;
+  color: #ff8c00;
+  transform: translateX(5px);
+}
+
+/* Logout button */
+.logout-btn {
+  margin-top: auto;
+  background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
+  color: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(90deg, #ff1a1a, #ff0000);
+  transform: translateY(-2px);
+}
+
+/* ================= RESPONSIVE SIDEBAR ================= */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px; /* hidden offscreen */
+    width: 260px;
+    height: 100%;
+    z-index: 1000;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.show {
+    left: 0; /* slide in */
+  }
+
+  /* Hamburger button */
+  .hamburger-btn {
+    display: flex;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1100;
+    width: 40px;
+    height: 40px;
+    background: #1a1a28;
+    border: none;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .hamburger-btn div {
+    width: 25px;
+    height: 3px;
+    background: #ff8c00;
+    margin: 4px 0;
+    transition: 0.3s;
+  }
+
+  /* Dark overlay when sidebar is open */
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 900;
+  }
+
+  .sidebar-overlay.show {
+    display: block;
+  }
+}
+
+
+.sidebar-profile-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border: 2px solid #ff8c00;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+
+.sidebar-menu button.active {
+  background: #33334d;
+  color: #ff8c00;
+  transform: translateX(5px);
+}
+
+
+.logout-button {
+  margin-top: auto;
+  background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
+  color: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.logout-button:hover {
+  background: linear-gradient(90deg, #ff1a1a, #ff0000);
+  transform: translateY(-2px);
+}
+
+
+
+.sidebar {
+  background: #1c1a2b; /* deep violet */
+}
+
+.sidebar:hover {
+  background: #2a1f4a; /* lighter violet on hover */
+}
+
+
+.sidebar-nav button:hover,
+.sidebar-nav button.active {
+  color: #9b59b6;
+  background: rgba(155, 89, 182, 0.1);
+}
+.sidebar:hover {
+  box-shadow:
+    0 0 15px rgba(155, 89, 182, 0.4),
+    0 0 30px rgba(155, 89, 182, 0.2);
+}
+.logout-btn {
+  background: linear-gradient(90deg, #9b59b6, #8e44ad);
+}
+
+.logout-btn:hover {
+  background: linear-gradient(90deg, #8e44ad, #9b59b6);
+}
+
+
+
+/* Sidebar menu buttons */
+.sidebar-menu button {
+  padding: 8px 12px; /* smaller padding */
+  font-size: 0.9rem; /* smaller font size */
+  border-radius: 8px; /* slightly smaller corners */
+  gap: 8px; /* reduce spacing if you have icons/text */
+}
+
+/* Reduce gap between buttons */
+.sidebar-menu {
+  gap: 8px; /* less space between buttons */
+}

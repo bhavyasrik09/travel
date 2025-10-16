@@ -1,0 +1,558 @@
+/* PostCard.css */
+
+/* Card container */
+.post-card {
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #f5f5f5;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.post-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+  transform: translateY(-2px);
+}
+
+/* Author info */
+.post-author {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.author-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.author-name:hover {
+  color: #0077b5;
+  text-decoration: underline;
+}
+
+.post-date {
+  font-size: 0.8rem;
+  color: #bbb;
+}
+
+/* Main content layout */
+.post-main {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Post images */
+.post-images {
+  flex: 1;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.post-image:hover {
+  transform: scale(1.03);
+}
+
+/* Image edit input */
+.edit-image-input {
+  width: 100%;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #2a2a2a;
+  color: #fff;
+  cursor: pointer;
+}
+
+.edit-image-input:focus {
+  outline: none;
+  border-color: #0073e6;
+}
+
+/* Post text content */
+.post-content {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-content h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.post-content p {
+  font-size: 0.95rem;
+  color: #ddd;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* Tags & Location */
+.post-tags,
+.post-location {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background: #333;
+  color: #eee;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+}
+
+.post-location {
+  color: #ccc;
+  font-size: 0.85rem;
+  background: #0077b5;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+/* Edit/Delete buttons */
+.post-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.post-actions button {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.post-actions .edit-btn {
+  background-color: #0073e6;
+  color: #fff;
+}
+
+.post-actions .delete-btn {
+  background-color: #e60023;
+  color: #fff;
+}
+
+.post-actions button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Inline edit inputs */
+.edit-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #2a2a2a;
+  color: #fff;
+}
+
+.edit-input:focus {
+  outline: none;
+  border-color: #0073e6;
+}
+
+.title-input {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.content-input {
+  resize: vertical;
+}
+
+.location-input,
+.tags-input {
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .post-main {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .post-images {
+    max-width: 100%;
+  }
+
+  .post-image {
+    height: 200px;
+  }
+
+  .post-content {
+    width: 100%;
+  }
+
+  .post-author {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
+
+.post-card {
+  background: #1e1e1e;
+  color: #f5f5f5;
+}
+.post-content h3,
+.post-content p,
+.post-tags .tag,
+.post-location,
+.post-author .author-name,
+.post-author .post-date {
+  color: #f5f5f5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* PostCard.css */
+
+/* Card container with purple glow */
+.post-card {
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 
+    0 0 15px rgba(132, 46, 255, 0.3),
+    0 0 25px rgba(164, 46, 255, 0.2),
+    0 0 40px rgba(155, 89, 182, 0.1); /* soft purple glow */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #f5f5f5;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.post-card:hover {
+  box-shadow: 
+    0 0 20px rgba(155, 89, 182, 0.6),
+    0 0 35px rgba(164, 46, 255, 0.4),
+    0 0 50px rgba(132, 46, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Author info */
+.post-author {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.author-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #f5f5f5;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.author-name:hover {
+  color: #9b59b6; /* purple hover */
+  text-decoration: underline;
+}
+
+.post-date {
+  font-size: 0.8rem;
+  color: #bbb;
+}
+
+/* Main content layout */
+.post-main {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Post images */
+.post-images {
+  flex: 1;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.post-image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
+}
+
+/* Post text content */
+.post-content {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-content h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.post-content p {
+  font-size: 0.95rem;
+  color: #ddd;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* Tags & Location */
+.post-tags,
+.post-location {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background: #2a1f3f; /* purple shade */
+  color: #eee;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  box-shadow: 0 0 8px rgba(155, 89, 182, 0.4);
+}
+
+.post-location {
+  color: #ccc;
+  font-size: 0.85rem;
+  background: #9b59b6; /* purple glow location badge */
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+/* Edit/Delete buttons */
+.post-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.post-actions button {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.post-actions .edit-btn {
+  background-color: #9b59b6; /* purple */
+  color: #fff;
+  box-shadow: 0 0 8px rgba(155, 89, 182, 0.6);
+}
+
+.post-actions .delete-btn {
+  background-color: #e60023;
+  color: #fff;
+}
+
+.post-actions button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Inline edit inputs */
+.edit-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #2a2a2a;
+  color: #fff;
+}
+
+.edit-input:focus {
+  outline: none;
+  border-color: #9b59b6;
+  box-shadow: 0 0 8px rgba(155, 89, 182, 0.5);
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .post-main {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .post-images {
+    max-width: 100%;
+  }
+
+  .post-image {
+    height: 200px;
+  }
+
+  .post-content {
+    width: 100%;
+  }
+
+  .post-author {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
+/* Text color override */
+.post-card {
+  background: #1e1e1e;
+  color: #f5f5f5;
+}
+.post-content h3,
+.post-content p,
+.post-tags .tag,
+.post-location,
+.post-author .author-name,
+.post-author .post-date {
+  color: #f5f5f5;
+}
+
+
+
+/* Global Purple Glow Theme */
+.purple-glow {
+  color: #f5f5f5;
+  background: #1e1e1e;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow:
+    0 0 15px rgba(132, 46, 255, 0.3),
+    0 0 25px rgba(164, 46, 255, 0.2),
+    0 0 40px rgba(155, 89, 182, 0.1);
+  transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.purple-glow:hover {
+  box-shadow:
+    0 0 20px rgba(155, 89, 182, 0.6),
+    0 0 35px rgba(164, 46, 255, 0.4),
+    0 0 50px rgba(132, 46, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Headings (h2, h3) with purple glow */
+.purple-glow h2,
+.purple-glow h3 {
+  color: #9b59b6;
+  text-shadow: 0 0 8px rgba(155, 89, 182, 0.8);
+}
+
+/* Buttons */
+.purple-glow-button {
+  background: #9b59b6;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(155, 89, 182, 0.6);
+  transition: all 0.2s ease-in-out;
+}
+
+.purple-glow-button:hover {
+  background: #a163d6;
+  box-shadow: 0 0 15px rgba(155, 89, 182, 0.8);
+  transform: scale(1.03);
+}
+
+/* Inputs */
+.purple-glow-input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #2a2a2a;
+  color: #f5f5f5;
+  box-shadow: inset 0 0 8px rgba(155, 89, 182, 0.4);
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.purple-glow-input:focus {
+  border-color: #9b59b6;
+  box-shadow: 0 0 10px rgba(155, 89, 182, 0.6);
+  outline: none;
+}
+
+/* Tags */
+.purple-glow-tag {
+  background: #2a1f3f;
+  color: #eee;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  box-shadow: 0 0 8px rgba(155, 89, 182, 0.4);
+}
+
+/* Location badge */
+.purple-glow-location {
+  color: #ccc;
+  background: #9b59b6;
+  padding: 3px 8px;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(155, 89, 182, 0.5);
+}

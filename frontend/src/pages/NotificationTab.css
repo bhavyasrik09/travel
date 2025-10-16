@@ -1,0 +1,48 @@
+.notification-container {
+  padding: 20px;
+  max-width: 700px;
+  margin: 40px auto;
+  background: rgba(50, 0, 70, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(140, 0, 255, 0.3);
+  color: white;
+  font-family: "Poppins", sans-serif;
+}
+
+.notification-container h2 {
+  text-align: center;
+  color: #b266ff;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.notification-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-card {
+  background: rgba(90, 0, 140, 0.6);
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  transition: transform 0.2s ease, background 0.3s ease;
+  border: 1px solid rgba(180, 0, 255, 0.3);
+}
+
+.notification-card:hover {
+  transform: scale(1.02);
+  background: rgba(120, 0, 180, 0.7);
+}
+
+.notification-card strong {
+  color: #d7aaff;
+}
+
+.notification-card small {
+  display: block;
+  color: #ccc;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}

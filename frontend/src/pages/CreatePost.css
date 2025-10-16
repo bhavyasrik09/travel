@@ -1,0 +1,232 @@
+/* CreatePost.css */
+
+/* Container for create post with purple glow */
+.create-post-container {
+  background: #1a1a28;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 
+    0 0 15px rgba(132, 46, 255, 0.3),
+    0 0 25px rgba(164, 46, 255, 0.2),
+    0 0 40px rgba(155, 89, 182, 0.1); /* soft purple glow */
+  max-width: 700px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+.create-post-container:hover {
+  box-shadow: 
+    0 0 20px rgba(155, 89, 182, 0.6),
+    0 0 35px rgba(164, 46, 255, 0.4),
+    0 0 50px rgba(132, 46, 255, 0.2);
+}
+
+/* Heading */
+.create-post-container h2 {
+  color: #9b59b6; /* purple accent */
+  font-size: 2rem;
+  margin-bottom: 15px;
+  border-left: 4px solid #9b59b6;
+  padding-left: 10px;
+  text-shadow: 0 0 5px rgba(155, 89, 182, 0.7);
+}
+
+/* Form inputs */
+.create-post-container input[type="text"],
+.create-post-container textarea,
+.create-post-container input[type="file"] {
+  background: #14141c;
+  border: 1px solid #33334d;
+  color: #f5f5f5;
+  padding: 12px 15px;
+  border-radius: 12px;
+  width: 100%;
+  font-size: 1rem;
+  transition: border 0.25s, box-shadow 0.25s;
+}
+
+.create-post-container input:focus,
+.create-post-container textarea:focus {
+  border-color: #9b59b6;
+  outline: none;
+  box-shadow: 0 0 8px rgba(155, 89, 182, 0.5);
+}
+
+/* Textarea styling */
+.create-post-container textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* File input */
+.create-post-container input[type="file"] {
+  padding: 6px;
+  border-radius: 8px;
+}
+
+/* Submit button with purple gradient */
+.create-post-container button[type="submit"] {
+  background: linear-gradient(90deg, #9b59b6, #6a1b9a);
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(155, 89, 182, 0.6);
+}
+
+.create-post-container button[type="submit"]:hover {
+  background: linear-gradient(90deg, #6a1b9a, #9b59b6);
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(155, 89, 182, 0.8);
+}
+
+/* Message text */
+.create-post-container .message {
+  color: #9b59b6;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .create-post-container {
+    padding: 20px;
+    margin: 15px;
+  }
+
+  .create-post-container h2 {
+    font-size: 1.6rem;
+  }
+}
+
+
+
+/* Ensure padding and borders don't cause overflow */
+.create-post-container,
+.create-post-container * {
+  box-sizing: border-box;
+}
+
+/* Container for create post with purple glow */
+.create-post-container {
+  background: #1a1a28;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 
+    0 0 15px rgba(132, 46, 255, 0.3),
+    0 0 25px rgba(164, 46, 255, 0.2),
+    0 0 40px rgba(155, 89, 182, 0.1);
+  max-width: 700px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+/* Heading */
+.create-post-container h2 {
+  color: #9b59b6;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  border-left: 4px solid #9b59b6;
+  padding-left: 10px;
+  text-shadow: 0 0 5px rgba(155, 89, 182, 0.7);
+}
+
+/* Form inputs */
+.create-post-container input[type="text"],
+.create-post-container textarea,
+.create-post-container input[type="file"] {
+  background: #14141c;
+  border: 1px solid #33334d;
+  color: #f5f5f5;
+  padding: 12px 15px;
+  border-radius: 12px;
+  width: 100%;
+  font-size: 1rem;
+  transition: border 0.25s, box-shadow 0.25s;
+  display: block;
+}
+
+/* Fix focus overflow */
+.create-post-container input:focus,
+.create-post-container textarea:focus {
+  border-color: #9b59b6;
+  outline: none;
+  box-shadow: 0 0 8px rgba(155, 89, 182, 0.5);
+}
+
+/* Textarea styling */
+.create-post-container textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* File input styling */
+.create-post-container input[type="file"] {
+  padding: 6px;
+  border-radius: 8px;
+}
+
+/* Submit button */
+.create-post-container button[type="submit"] {
+  background: linear-gradient(90deg, #9b59b6, #6a1b9a);
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(155, 89, 182, 0.6);
+  width: 100%;
+}
+
+/* Button hover effect */
+.create-post-container button[type="submit"]:hover {
+  background: linear-gradient(90deg, #6a1b9a, #9b59b6);
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(155, 89, 182, 0.8);
+}
+
+/* Message text */
+.create-post-container .message {
+  color: #9b59b6;
+  font-weight: 500;
+  margin-top: 5px;
+  word-wrap: break-word;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .create-post-container {
+    padding: 20px;
+    margin: 15px;
+  }
+
+  .create-post-container h2 {
+    font-size: 1.6rem;
+  }
+}
+
+
+h2 {
+  color: #9b59b6 !important;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-left: 5px solid #9b59b6;
+  padding-left: 12px;
+  text-shadow: 0 0 8px rgba(155, 89, 182, 0.8);
+}
+
+

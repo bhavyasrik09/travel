@@ -1,0 +1,1112 @@
+/* ===== Main Container ===== */
+.canvas-main-container {
+  display: flex;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: #f2f2f7;
+  overflow: hidden;
+}
+
+/* ===== Sidebar ===== */
+.canvas-sidebar {
+  width: 280px;
+  background: linear-gradient(180deg, #6a11cb 0%, #2575fc 100%);
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+}
+
+.canvas-sidebar h3 {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.canvas-search-input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 15px;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+.canvas-stickers-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.canvas-sticker-item {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.canvas-sticker-item:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255,255,255,0.6);
+}
+
+/* Components Buttons */
+.canvas-sidebar button {
+  padding: 10px;
+  margin-bottom: 10px;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.canvas-sidebar button:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* Upload Button */
+.canvas-upload-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.canvas-upload-btn input {
+  display: none;
+}
+
+/* Undo/Redo */
+.canvas-undo-redo {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.canvas-undo-redo button {
+  flex: 1;
+  background: rgba(255,255,255,0.2);
+}
+
+/* Save Button */
+.canvas-save-btn {
+  margin-top: 20px;
+  padding: 12px;
+  background: #fff;
+  color: #6a11cb;
+  border-radius: 12px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.canvas-save-btn:hover {
+  background: #f3f3f3;
+}
+
+/* ===== Canvas Area ===== */
+.canvas-area-container {
+  flex: 1;
+  background: #fff;
+  margin: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Selected element highlight */
+.rnd {
+  position: absolute;
+}
+
+.canvas-text-element {
+  cursor: move;
+  min-width: 50px;
+  min-height: 20px;
+  outline: none;
+  padding: 2px 4px;
+}
+
+.canvas-image-element {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: move;
+  border-radius: 8px;
+}
+
+.canvas-shape-element {
+  cursor: move;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Shape types */
+.canvas-shape-rectangle { }
+.canvas-shape-circle { border-radius: 50%; }
+.canvas-shape-arrow {
+  width: 50px;
+  height: 10px;
+  background: #000;
+  position: relative;
+}
+.canvas-shape-arrow::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #000;
+}
+
+/* ===== Text Controls ===== */
+.canvas-text-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 320px;
+  background: rgba(255,255,255,0.95);
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  z-index: 9999;
+}
+
+.canvas-text-controls label {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ===== Crop Modal ===== */
+.canvas-crop-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.canvas-crop-modal button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #6a11cb;
+  color: #fff;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.canvas-crop-modal button:hover {
+  background: #2575fc;
+}
+
+/* Scrollbar Styling */
+.canvas-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.canvas-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.canvas-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 3px;
+}
+
+/* Hover Shadow for elements */
+.rnd:hover {
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+/* Purple border when selected */
+.rnd[style*="border: 2px solid purple"] {
+  box-shadow: 0 0 8px rgb(255, 255, 255);
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+  .canvas-sidebar { width: 220px; }
+  .canvas-text-controls { left: 240px; bottom: 10px; }
+}
+
+@media screen and (max-width: 768px) {
+  .canvas-main-container { flex-direction: column; }
+  .canvas-sidebar { width: 100%; height: auto; flex-direction: row; overflow-x: auto; }
+  .canvas-area-container { margin: 10px; height: 60vh; }
+  .canvas-text-controls { bottom: 10px; left: 10px; }
+}
+.canvas-main-container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  gap: 10px;
+}
+
+/* Left: PDF-like canvas area */
+.canvas-left {
+  flex: 2;
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  position: relative;
+  overflow: hidden;
+  padding: 10px;
+}
+
+/* Right: Sidebar */
+.canvas-right {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-left: 2px solid #ddd;
+  overflow-y: auto;
+}
+.canvas-main-container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  gap: 10px;
+  overflow: hidden; /* prevents horizontal scroll */
+}
+
+/* Left: PDF-like canvas area */
+.canvas-left {
+  flex: 2;
+  min-width: 600px; /* ensures canvas is visible on smaller screens */
+  max-width: 900px;
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  position: relative;
+  overflow: auto; /* scroll inside canvas if needed */
+  padding: 10px;
+}
+
+/* Right: Sidebar */
+.canvas-right {
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px; /* restricts sidebar width */
+  background: #fff;
+  padding: 15px;
+  border-left: 2px solid #ddd;
+  overflow-y: auto; /* scrolls vertically if content is too tall */
+}
+
+/* Optional: reduce sticker image size */
+.canvas-stickers-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.canvas-sticker-item {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+/* Buttons & inputs fit inside sidebar */
+.canvas-right button,
+.canvas-right input,
+.canvas-right select {
+  width: 100%;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+/* Text controls modal */
+.canvas-text-controls {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  z-index: 999;
+}
+
+/* Crop modal */
+.canvas-crop-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  z-index: 1000;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+.canvas-main-container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  gap: 10px;
+  overflow: hidden; /* prevent horizontal scroll */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Left: PDF-like canvas area */
+.canvas-left {
+  flex: none; /* fixed size */
+  width: 600px;   /* portrait width */
+  height: 850px;  /* portrait height */
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  position: relative;
+  overflow: auto; /* scroll inside canvas if needed */
+  padding: 10px;
+  margin: auto 0; /* vertically center */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Right: Sidebar */
+.canvas-right {
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px; /* restrict sidebar width */
+  background: #fff;
+  padding: 15px;
+  border-left: 2px solid #ddd;
+  overflow-y: auto; /* scrolls vertically if content is too tall */
+  height: 100%; /* match main container height */
+}
+
+/* Stickers */
+.canvas-stickers-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.canvas-sticker-item {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+/* Buttons & inputs fit inside sidebar */
+.canvas-right button,
+.canvas-right input,
+.canvas-right select {
+  width: 100%;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+/* Text controls modal */
+.canvas-text-controls {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  z-index: 999;
+}
+
+/* Crop modal */
+.canvas-crop-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  z-index: 1000;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+.canvas-main-container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  gap: 10px;
+  overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Left: PDF-like canvas area */
+.canvas-left {
+  flex: none;
+  width: 600px;   /* portrait width */
+  height: 850px;  /* portrait height */
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  position: relative;
+  overflow: auto; /* scroll inside canvas if needed */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  align-self: center; /* vertically center in flex */
+}
+
+/* Right: Sidebar */
+.canvas-right {
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px; /* restrict sidebar width */
+  background: #fff;
+  padding: 15px;
+  border-left: 2px solid #ddd;
+  height: 100%; /* full height */
+  overflow-y: auto; /* scroll if content too tall */
+  box-sizing: border-box;
+}
+
+/* Stickers container */
+.canvas-stickers-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.canvas-sticker-item {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+/* Buttons & inputs fit inside sidebar */
+.canvas-right button,
+.canvas-right input,
+.canvas-right select {
+  width: 100%;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+/* Text controls modal */
+.canvas-text-controls {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  z-index: 999;
+}
+
+/* Crop modal */
+.canvas-crop-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  z-index: 1000;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+.canvas-main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100vw;
+  height: 100vh;
+  background: #e6e6e6;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.canvas-left {
+  width: 600px;
+  height: 850px; /* portrait */
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: auto;
+  padding: 10px;
+}
+
+.canvas-right {
+  width: 280px;
+  height: 850px;
+  background: #fff;
+  padding: 15px;
+  border-left: 2px solid #ddd;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Optional: sticker images inside sidebar */
+.canvas-stickers-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.canvas-sticker-item {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.canvas-main-container {
+  display: flex;           /* left-right layout */
+  flex-direction: row;
+  justify-content: center; /* center horizontally */
+  align-items: center;     /* center vertically */
+  gap: 15px;               /* space between canvas and sidebar */
+  width: 100vw;            /* full viewport width */
+  height: 100vh;           /* full viewport height */
+  background: #e6e6e6;     /* neutral background around canvas */
+  padding: 10px;           /* space inside container */
+  box-sizing: border-box;  /* include padding in width/height */
+  overflow: hidden;        /* hide any extra scroll outside */
+}
+.canvas-main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start; /* align top */
+  gap: 15px;
+  width: 100%;            /* Fit parent container */
+  max-width: 100%;        /* Prevent overflow */
+  height: auto;           /* Let height adjust with content */
+  background: #e6e6e6;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;       /* Hide accidental overflow */
+}
+
+.canvas-left {
+  width: 100%;           /* Let it shrink/grow within parent */
+  max-width: 600px;      /* Portrait canvas max width */
+  height: 850px;         /* Portrait height */
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: auto;
+  padding: 10px;
+  flex-shrink: 0;        /* Prevent shrinking too much */
+}
+
+.canvas-right {
+  width: 280px;
+  max-width: 280px;
+  height: 850px;
+  background: #fff;
+  padding: 15px;
+  border-left: 2px solid #ddd;
+  overflow-y: auto;
+  box-sizing: border-box;
+  flex-shrink: 0;        /* Keep sidebar fixed width */
+}
+/* Canvas Text Element (default display) */
+.canvas-text-element {
+  outline: none;
+  cursor: text;
+  user-select: text;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Input field when editing text */
+.canvas-text-element input {
+  background: transparent;   /* Make background transparent */
+  color: inherit;            /* Keep text color as set */
+  border: none;              /* Remove borders */
+  outline: none;             /* Remove focus outline */
+  font-family: inherit;      /* Keep same font */
+  font-size: inherit;        /* Keep same font size */
+  font-weight: inherit;      /* Bold/normal */
+  font-style: inherit;       /* Italic */
+  width: 100%;               /* Full width of Rnd element */
+  height: 100%;              /* Full height of Rnd element */
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  caret-color: black;        /* Ensure cursor is visible */
+}
+/* ===== Main Container ===== */
+.canvas-main-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+/* ===== Canvas Left (Workspace) ===== */
+.canvas-left {
+  flex: 3;
+  position: relative;
+  background: #ffffff;
+  margin: 20px;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  overflow: hidden;
+}
+
+/* RND Element Selected Border */
+.rnd-drag {
+  transition: transform 0.1s ease;
+}
+
+/* Canvas Image / Sticker Element */
+.canvas-image-element {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Canvas Shape Element */
+.canvas-shape-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: move;
+}
+
+/* ===== Canvas Right (Sidebar) ===== */
+.canvas-right {
+  flex: 1;
+  padding: 20px;
+  border-left: 1px solid #ddd;
+  background: #fafafa;
+  overflow-y: auto;
+}
+
+.canvas-right h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.canvas-stickers-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.canvas-sticker-item {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.canvas-sticker-item:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.canvas-upload-btn {
+  display: inline-block;
+  margin-top: 10px;
+  cursor: pointer;
+  background: #6c63ff;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.canvas-upload-btn:hover {
+  background: #5751d1;
+}
+
+.canvas-save-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  background: #00b894;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.canvas-save-btn:hover {
+  background: #019875;
+}
+
+/* ===== Selected Element Controls ===== */
+.canvas-element-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  max-width: 250px;
+  z-index: 1000;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.canvas-element-controls label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.canvas-element-controls input[type="number"],
+.canvas-element-controls select {
+  width: 100%;
+  padding: 4px 6px;
+  margin-top: 2px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* ===== Crop Modal ===== */
+.canvas-crop-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  flex-direction: column;
+}
+
+.canvas-crop-modal button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #6c63ff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.canvas-crop-modal button:hover {
+  background: #5751d1;
+}
+
+/* ===== RND Element Selected Border ===== */
+.rnd-selected {
+  border: 2px solid purple !important;
+  border-radius: inherit;
+}
+
+/* ===== Mobile Responsiveness ===== */
+@media (max-width: 768px) {
+  .canvas-main-container {
+    flex-direction: column;
+  }
+  .canvas-left {
+    margin: 10px;
+    height: 60vh;
+  }
+  .canvas-right {
+    border-left: none;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    height: 35vh;
+  }
+}
+/* Remove border/glow for text elements */
+.rnd-text {
+  border: none !important;
+}
+
+.canvas-main-container input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.rnd-selected,
+.react-draggable {
+  box-shadow: none !important;
+}
+/* 🎛️ Element Control Panel Styling */
+.element-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 25, 0.9);
+  border: 1px solid #2c2c35;
+  border-radius: 16px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  z-index: 100;
+  transition: all 0.25s ease;
+}
+
+.element-controls:hover {
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
+}
+
+/* Buttons */
+.element-controls button {
+  background: #1f1f27;
+  border: 1px solid #3c3c47;
+  color: #e5e5ec;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.element-controls button:hover {
+  background: #2b2b38;
+  border-color: #5a5a6a;
+}
+
+.element-controls button.active {
+  background: #3a3a50;
+  border-color: #8888ff;
+  color: #000000;
+  box-shadow: 0 0 8px rgba(120, 120, 255, 0.4);
+}
+
+/* Color Pickers & Inputs */
+.element-controls input[type="color"] {
+  appearance: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.element-controls input[type="color"]::-webkit-color-swatch {
+  border-radius: 8px;
+  border: 2px solid #444;
+}
+
+.element-controls input[type="range"] {
+  width: 80px;
+  accent-color: #8888ff;
+  cursor: pointer;
+}
+
+/* Dropdowns (like border style selector) */
+.element-controls select {
+  background: #1f1f27;
+  border: 1px solid #3c3c47;
+  color: #000000;
+  border-radius: 8px;
+  padding: 5px 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.element-controls select:hover {
+  background: #2b2b38;
+  border-color: #5a5a6a;
+}
+
+/* Labels (for curve sliders etc.) */
+.element-controls label {
+  color: #bcbcd5;
+  font-size: 13px;
+  margin-right: 6px;
+}
+.react-draggable {
+  box-shadow: none !important;
+}
+
+.react-draggable > div {
+  box-shadow: none !important;
+}
+
+.canvas-left .react-draggable,
+.canvas-left .react-draggable * {
+  box-shadow: none !important;
+}
+/* Crop Modal Overlay */
+.canvas-crop-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+/* Crop Modal Container */
+.canvas-crop-modal .crop-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 900px;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Crop Modal Buttons */
+.canvas-crop-modal button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #f9a826;
+  color: #fff;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.canvas-crop-modal button:hover {
+  background-color: #e5941d;
+}
+
+.canvas-crop-modal .crop-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+/* Canvas Left (A4 size) */
+.canvas-left {
+  width: 794px;       /* A4 width in px */
+  height: 1123px;     /* A4 height in px */
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: auto;     /* scroll if content overflows */
+  padding: 10px;
+  flex-shrink: 0;     /* prevent shrinking */
+  margin: auto 0;     /* center vertically */
+}
+/* ===== Main Container ===== */
+.canvas-main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start; /* align top */
+  gap: 15px;
+  width: 100%;
+  min-height: 100vh;
+  background: #e6e6e6;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;       /* vertical scroll if content exceeds viewport */
+}
+
+/* Canvas Left (A4 size) */
+.canvas-left {
+  width: 794px;       /* A4 width */
+  height: 1123px;     /* A4 height */
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: auto;     /* scroll inside canvas if content exceeds */
+  padding: 10px;
+  flex-shrink: 0;
+  margin-top: 10px;   /* small margin from top */
+}
+
+/* Canvas Right (Sidebar) */
+.canvas-right {
+  width: 280px;
+  max-width: 280px;
+  background: #272424;
+  padding: 15px;
+  border-left: 2px solid #ddd;
+  height: auto;       /* auto height to allow sidebar to scroll */
+  flex-shrink: 0;
+  overflow-y: auto;   /* vertical scroll for sidebar */
+  box-sizing: border-box;
+}
+.canvas-left {
+  width: 700px;       /* slightly smaller than full A4 width */
+  height: 992px;      /* maintain A4 aspect ratio */
+  background: #383737;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: auto;      /* scroll if content exceeds */
+  padding: 10px;
+  flex-shrink: 0;
+  margin: auto 0;      /* vertically center in flex container */
+}
+.canvas-left {
+  color: #000; /* dark black text by default */
+}
