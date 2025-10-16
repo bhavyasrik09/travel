@@ -8,12 +8,16 @@ const authRoutes = require("./routes/auth");
 const profileRoutes = require("./routes/profile");
 const bucketRoutes = require("./routes/travel");
 const notificationRoutes = require("./routes/notifications");
+
+const passport = require("passport");
+const cookieSession = require("cookie-session");
+require('./config/passport'); // your passport.js file for Google OAuth
+
 const app = express();
 
 // Create HTTP server for Socket.io
 const http = require("http");
 const server = http.createServer(app);
-
 
 // Socket.io setup
 const { Server } = require("socket.io");
@@ -44,6 +48,20 @@ app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static("uploads")); // serve profile pictures
 
+// ----------------------
+// Passport & Session Setup
+// ----------------------
+app.use(
+  cookieSession({
+    name: "session",
+    keys: [process.env.SESSION_KEY || "some_random_key"], // set in .env
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
@@ -69,5 +87,3 @@ app.set("io", io);
 // Start server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-

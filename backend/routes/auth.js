@@ -6,6 +6,7 @@ const User = require("../models/User");
 const auth = require("../middleware/auth");
 const multer = require("multer");
 const path = require("path");
+const passport = require("passport"); // Added for Google login
 
 // ----------------- MULTER SETUP -----------------
 const storage = multer.diskStorage({
@@ -133,6 +134,61 @@ router.delete("/delete", auth, async (req, res) => {
   }
 });
 
+// ----------------- GOOGLE LOGIN -----------------
 
+// Initiate Google login
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+// Google callback
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  (req, res) => {
+    // Redirect to frontend after successful login
+    res.redirect(process.env.FRONTEND_URL || "http://localhost:3000");
+  }
+);// ----------------- GOOGLE LOGIN (POST for One Tap) -----------------
+router.post("/google", async (req, res) => {
+  try {
+    const { name, email, profilePic, googleId } = req.body;
+
+    // Check if user already exists
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      // Create new Google user WITHOUT password
+      user = new User({
+        name,
+        email,
+        profilePic,
+        googleId: googleId || null,
+        isGoogleUser: true, // ✅ mark as Google user
+      });
+
+      await user.save();
+    }
+
+    // Generate JWT token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.json({ token, msg: "Google login/signup successful" });
+  } catch (err) {
+    console.error("Google login error:", err);
+
+    // Check if it's a validation error (e.g., password required)
+    if (err.name === "ValidationError") {
+      return res
+        .status(400)
+        .json({ msg: "Validation failed: make sure password is optional" });
+    }
+
+    res.status(500).json({ msg: "Server error" });
+  }
+});
 
 module.exports = router;

@@ -14,7 +14,10 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+    // ✅ Password is required only if not a Google user
+    required: function() {
+      return !this.isGoogleUser;
+    }
   },
   bio: {
     type: String,
@@ -65,9 +68,17 @@ const userSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post"
     }
-  ]
+  ],
+
+  // --- Google Login Fields ---
+  googleId: {
+    type: String,
+    default: null
+  },
+  isGoogleUser: {
+    type: Boolean,
+    default: false
+  }
 });
 
 module.exports = mongoose.model("User", userSchema);
-
-
